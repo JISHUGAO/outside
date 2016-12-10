@@ -1,16 +1,20 @@
 <?php
-use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 $this->context->contentTitle = $this->title = '分类管理';
 
 ?>
+<?php $form = ActiveForm::begin([
+    'action' => URL::toRoute(['content/delete-category']),
+    'method' => 'get'
+]) ?>
 <div class="box">
     <div class="box-header with-border">
         <div class="box-title">管理信息</div>
         <div class="box-tools">
-            <a href="<?= Url::toRoute(['content/add-article']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>添加分类</a>
+            <a href="<?= Url::toRoute(['content/add-category']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>添加分类</a>
             <button class="btn btn-danger btn-sm"><i class="fa fa-minus"></i> 删除</button>
         </div>
 
@@ -41,14 +45,14 @@ $this->context->contentTitle = $this->title = '分类管理';
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => '操作',
-                    'template' => '{edit-article}{delete-article}',
+                    'template' => '{edit-category}{delete-category}',
                     'buttons' => [
-                        'edit-article' => function($url, $model, $key) {
+                        'edit-category' => function($url, $model, $key) {
                             return Html::a('<i class="fa fa-edit"></i>', $url, [
                                 'class' => 'btn btn-primary btn-xs'
                             ]).' ';
                         },
-                        'delete-article' => function($url, $model, $key) {
+                        'delete-category' => function($url, $model, $key) {
                             return Html::a('<i class="fa fa-close"></i>', $url, [
                                 'class' => 'btn btn-danger btn-xs'
                             ]);
@@ -75,6 +79,7 @@ $this->context->contentTitle = $this->title = '分类管理';
 
     </div>
 </div>
+<?php ActiveForm::end() ?>
 <?php
 \backend\assets\IcheckAsset::register($this);
 ?>

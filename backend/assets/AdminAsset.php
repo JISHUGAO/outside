@@ -11,7 +11,7 @@ class AdminAsset extends AssetBundle
         'css/bootstrap.css',
         'css/AdminLTE.css',
         'css/skins/_all-skins.min.css',
-        'css/font-awesome.min.css'
+        'css/font-awesome.min.css',
     ];
     public $js = [
         'libs/jQuery/jquery-2.2.3.min.js',

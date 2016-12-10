@@ -9,8 +9,10 @@ namespace backend\controllers;
 
 use common\models\Article;
 use common\models\Category;
+use League\FactoryMuffin\Exceptions\ModelException;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 class ContentController extends BaseController
@@ -111,4 +113,56 @@ class ContentController extends BaseController
             'dataProvider' => $dataProvider
         ]);
     }
+
+    public function actionAddCategory()
+    {
+        $model = Category::getInstance();
+        $model->loadDefaultValues();
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['/content/category']);
+            }
+        }
+
+        return $this->render('/category/add', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionEditCategory()
+    {
+        $model = Category::getInstance(Yii::$app->request->get('id'));
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['/content/category']);
+            }
+        }
+        return $this->render('/category/add', [
+            'model' => $model
+        ]);
+    }
+
+    public function actionDeleteCategory()
+    {
+        $model = Category::getInstance(Yii::$app->request->get('id'));
+        if ($model->delete()) {
+            $this->goBack(Yii::$app->request->getReferrer());
+        } else {
+            throw new ModelException('操作失败');
+        }
+    }
+
+    public function getArticle($id = 0)
+    {
+        if ($id === 0) {
+            return new Article();
+        }
+
+        if (($model = Article::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('未发现请求的记录');
+        }
+    }
+
 }

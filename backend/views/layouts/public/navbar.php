@@ -1,3 +1,7 @@
+<?php
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
 <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
 
@@ -12,7 +16,7 @@
             <ul class="dropdown-menu">
                 <!-- User image -->
                 <li>
-                    退出
+                    <?= Html::a('退出', Url::toRoute('/login/logout')) ?>
                 </li>
 
             </ul>

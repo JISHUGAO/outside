@@ -19,6 +19,9 @@ class LoginController extends Controller
 
     public function actionIndex()
     {
+        if (!Yii::$app->user->isGuest) {
+            return $this->redirect(['/main/index']);
+        }
         $error = [];
         if (Yii::$app->request->isPost) {
             $loginForm = new LoginForm();
@@ -30,5 +33,11 @@ class LoginController extends Controller
         }
 
         return $this->render('index', $error);
+    }
+
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+        return $this->redirect(['/login/index']);
     }
 }

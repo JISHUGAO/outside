@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 AdminAsset::register($this);
+\backend\assets\IcheckAsset::register($this);
 //$this->contentTitle = '内容管理';
 //$this->subhead = '';
 ?>
