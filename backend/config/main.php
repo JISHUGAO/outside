@@ -15,6 +15,7 @@ return [
     'modules' => [],
     'components' => [
         'request' => [
+            'cookieValidationKey' => '23423edfserthrty',
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [
@@ -46,6 +47,21 @@ return [
             ],
         ],
         */
+        'assetManager'=>[
+            'bundles'=>[
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'js' => [],
+                    'depends' => [
+                        'backend\assets\AdminAsset'
+                    ]
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => []
+                ],
+            ],
+
+        ],
     ],
     'params' => $params,
 ];

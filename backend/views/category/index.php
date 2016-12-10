@@ -1,20 +1,16 @@
 <?php
+use yii\widgets\LinkPager;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-$this->context->contentTitle = $this->title = '文章管理';
+$this->context->contentTitle = $this->title = '分类管理';
 
 ?>
-<?php $form = ActiveForm::begin([
-    'action' => URL::toRoute(['content/delete-article']),
-    'method' => 'get'
-]) ?>
-<div class="box box-info">
+<div class="box">
     <div class="box-header with-border">
         <div class="box-title">管理信息</div>
         <div class="box-tools">
-            <a href="<?= Url::toRoute(['content/add-article']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> 发布文章</a>
+            <a href="<?= Url::toRoute(['content/add-article']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>添加分类</a>
             <button class="btn btn-danger btn-sm"><i class="fa fa-minus"></i> 删除</button>
         </div>
 
@@ -38,23 +34,10 @@ $this->context->contentTitle = $this->title = '文章管理';
                     'attribute' => 'id'
                 ],
                 [
-                    'header' => '标题',
-                    'attribute' => 'title'
+                    'header' => '名称',
+                    'attribute' => 'name'
                 ],
-                [
-                    'header' => '分类',
-                    /*'content' => function($model) {
-                        return  $model->category->name;
-                    }*/
-                    'attribute' => 'category.name'
-                ],
-                [
-                    'header' => '时间',
-                    'attribute' => 'create_by',
-                    'content' => function($model) {
-                        return $model->create_by <= 0 ? '' : date('Y-m-d H:i:s', $model->create_by);
-                    }
-                ],
+
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => '操作',
@@ -92,7 +75,6 @@ $this->context->contentTitle = $this->title = '文章管理';
 
     </div>
 </div>
-<?php $form->end() ?>
 <?php
 \backend\assets\IcheckAsset::register($this);
 ?>

@@ -16,6 +16,9 @@ class BaseController extends Controller
 
     public $menus;
 
+    public $contentTitle;
+    public $subhead;
+
     public function init()
     {
         if (Yii::$app->user->isGuest) {

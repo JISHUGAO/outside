@@ -14,7 +14,7 @@ AdminAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <title><?= Yii::$app->params['name'] .' | '. Html::encode($this->title) ?></title>
 
     <?php $this->head() ?>
 </head>
@@ -24,9 +24,9 @@ AdminAsset::register($this);
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="<?= URL::home() ?>" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>A</b>LT</span>
+            <span class="logo-mini"><?= Yii::$app->params['name'] ?></span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><?= Yii::$app->params['name'] ?></span>
         </a>
@@ -59,12 +59,12 @@ AdminAsset::register($this);
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                内容管理
-                <small>副标题</small>
+                <?= Html::encode($this->context->contentTitle) ?>
+                <small><?= Html::encode($this->context->subhead) ?></small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li class="active">内容管理</li>
+                <li class="active"><?= Html::encode($this->context->contentTitle) ?></li>
             </ol>
         </section>
 
@@ -84,8 +84,12 @@ AdminAsset::register($this);
     </footer>
 
 </div>
-
 <?php $this->endBody() ?>
+<?php
+if (isset($this->blocks['contentScript'])) {
+    echo $this->blocks['contentScript'];
+}
+?>
 </body>
 </html>
 <?php $this->endPage() ?>

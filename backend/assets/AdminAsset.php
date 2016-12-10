@@ -17,6 +17,7 @@ class AdminAsset extends AssetBundle
         'libs/jQuery/jquery-2.2.3.min.js',
         'js/bootstrap.js',
         'js/app.js',
+        'js/common.js'
     ];
     public $depends = [
        // 'yii\web\YiiAsset',
