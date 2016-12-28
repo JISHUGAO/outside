@@ -1,78 +1,56 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Administrator
+ * Date: 2016/12/5 0005
+ * Time: 16:26
+ */
 namespace common\models;
 
-use Yii;
 use yii\base\Model;
+use Yii;
+use common\models\User;
 
-/**
- * Login form
- */
 class LoginForm extends Model
 {
     public $username;
-    public $password;
-    public $rememberMe = true;
+    public $pwd;
 
     private $_user;
 
-
-    /**
-     * @inheritdoc
-     */
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
-            ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
-            ['password', 'validatePassword'],
+            [['username', 'pwd'], 'required', 'message' => '账号或密码不能为空'],
+            ['pwd', 'validatePassword']
         ];
     }
 
-    /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
-     */
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+            if (!$user || !$user->validatePassword($this->pwd)) {
+                $this->addError($attribute, '密码错误');
             }
         }
     }
 
-    /**
-     * Logs in a user using the provided username and password.
-     *
-     * @return bool whether the user is logged in successfully
-     */
-    public function login()
+    public function getUser($flag = null)
+    {
+        if ($this->_user == null) {
+            $this->_user = User::findByAccount($this->username, $flag);
+        }
+        return $this->_user;
+    }
+
+    public function login($flag = User::NORMAL_USER_FLAG)
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+            $result = Yii::$app->user->login($this->getUser($flag));
+            return $result;
         } else {
             return false;
         }
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    protected function getUser()
-    {
-        if ($this->_user === null) {
-            $this->_user = User::findByUsername($this->username);
-        }
-
-        return $this->_user;
     }
 }

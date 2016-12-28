@@ -32,25 +32,9 @@ AdminAsset::register($this);
             <span class="logo-lg"><?= Yii::$app->params['name'] ?></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
-        <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                <span class="sr-only">Toggle navigation</span>
-            </a>
 
-            <div class="container-fluid">
-                <div class="collapse navbar-collapse" id="navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="<?= Url::toRoute('/content/article') ?>">内容</a></li>
-                        <li><a href="<?= Url::toRoute('user/index') ?>">用户</a></li>
-                        <li><a href="<?= Url::toRoute('system/config') ?>">系统</a></li>
-                    </ul>
+        <?= $this->render('public/navbar') ?>
 
-                    <?= $this->render('public/navbar') ?>
-                </div>
-            </div>
-
-        </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
     <?= $this->render('/layouts/public/left') ?>

@@ -1,6 +1,7 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'language' => 'zh-CN',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -8,6 +9,9 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-        ]
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+        ],
     ],
 ];

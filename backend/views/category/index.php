@@ -7,14 +7,14 @@ $this->context->contentTitle = $this->title = '分类管理';
 
 ?>
 <?php $form = ActiveForm::begin([
-    'action' => URL::toRoute(['content/delete-category']),
+    'action' => URL::toRoute(['category/delete']),
     'method' => 'get'
 ]) ?>
 <div class="box">
     <div class="box-header with-border">
         <div class="box-title">管理信息</div>
         <div class="box-tools">
-            <a href="<?= Url::toRoute(['content/add-category']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>添加分类</a>
+            <a href="<?= Url::toRoute(['category/add']) ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>添加分类</a>
             <button class="btn btn-danger btn-sm"><i class="fa fa-minus"></i> 删除</button>
         </div>
 
@@ -45,14 +45,14 @@ $this->context->contentTitle = $this->title = '分类管理';
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'header' => '操作',
-                    'template' => '{edit-category}{delete-category}',
+                    'template' => '{edit}{delete}',
                     'buttons' => [
-                        'edit-category' => function($url, $model, $key) {
+                        'edit' => function($url, $model, $key) {
                             return Html::a('<i class="fa fa-edit"></i>', $url, [
                                 'class' => 'btn btn-primary btn-xs'
                             ]).' ';
                         },
-                        'delete-category' => function($url, $model, $key) {
+                        'delete' => function($url, $model, $key) {
                             return Html::a('<i class="fa fa-close"></i>', $url, [
                                 'class' => 'btn btn-danger btn-xs'
                             ]);

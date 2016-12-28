@@ -13,6 +13,7 @@ class Article extends BaseActiveRecord
 {
     const SCENARIO_ADD = 'add';
     const SCENARIO_EDIT = 'edit';
+    const SCENARIO_CRAWL = 'crawl';
 
     public static function tableName()
     {
@@ -30,10 +31,13 @@ class Article extends BaseActiveRecord
 
     public function scenarios()
     {
-        $fields = ['title', 'category_id', 'cover', 'description', 'content', 'sort'];
+        $fields = ['title', 'category_id', 'cover', 'description', 'content', 'sort', 'view_count',
+            'comment_count', 'channel_id', 'crawl_source_url', 'source_name', 'source_url'
+        ];
         return [
             self::SCENARIO_ADD => $fields,
-            self::SCENARIO_EDIT => $fields
+            self::SCENARIO_EDIT => $fields,
+            self::SCENARIO_CRAWL => $fields
         ];
     }
 

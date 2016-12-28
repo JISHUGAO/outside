@@ -3,7 +3,8 @@ $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
     require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+    require(__DIR__ . '/params-local.php'),
+    require(__DIR__.'/crawler/article.php')
 );
 
 return [
@@ -11,6 +12,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'console\controllers',
+    'controllerMap' => [
+        'migrates' => [
+            'class' => 'e282486518\migration\ConsoleController',
+        ],
+    ],
     'components' => [
         'log' => [
             'targets' => [
@@ -20,6 +26,7 @@ return [
                 ],
             ],
         ],
+
     ],
     'params' => $params,
 ];

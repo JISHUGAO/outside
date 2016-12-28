@@ -7,10 +7,10 @@
  */
 namespace backend\controllers;
 
-use backend\models\LoginForm;
+use common\models\LoginForm;
 use yii\web\controller;
 use Yii;
-use yii\helpers\Json;
+use common\models\User;
 
 class LoginController extends Controller
 {
@@ -20,18 +20,18 @@ class LoginController extends Controller
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->redirect(['/main/index']);
+            return $this->goHome();
         }
         $error = [];
         if (Yii::$app->request->isPost) {
             $loginForm = new LoginForm();
             if ($loginForm->load(Yii::$app->request->post(), 'info') && $loginForm->login()) {
-                return $this->redirect(['content/article']);
+                return $this->gohome();
             } else {
                 $error = $loginForm->getErrors();
             }
         }
-
+        var_dump($error);
         return $this->render('index', $error);
     }
 

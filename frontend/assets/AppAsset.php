@@ -15,9 +15,8 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        'assets/js/'. (YII_DEBUG === true ? 'vue.js' : 'vue.min.js')
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }
