@@ -31,7 +31,7 @@ class LoginController extends Controller
                 $error = $loginForm->getErrors();
             }
         }
-        var_dump($error);
+
         return $this->render('index', $error);
     }
 

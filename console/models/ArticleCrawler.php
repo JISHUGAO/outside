@@ -63,7 +63,7 @@ class ArticleCrawler extends BaseCrawler
                 $publishTime = $node->filter($this->rules['list_rule']['datetime_rule'])->text();
                 if ($publishTime) {
                     list($date, $time) = explode(' ', $publishTime);
-                    $isContinue = $this->today == $date ? true : false;
+                    $isContinue = $this->today == date('Y-m-d', strtotime($date)) ? true : false;
                     if (!$isContinue) {
                         return '';
                     }
@@ -81,13 +81,21 @@ class ArticleCrawler extends BaseCrawler
                     $article['crawl_source_url'] = $href;
                     $client = self::getClient();
                     $crawler = $client->request('Get', $href);
-                    $content = $crawler->filter($this->rules['detail_rule']['content'])->html();
-                    //$output = iconv('utf-8', 'gbk//IGNORE', $output);
-                    $article['description'] = mb_substr(strip_tags($content), 0, 50);
-                    $article['content'] = $content;
-                    $article['source_name'] = $crawler->filter($this->rules['detail_rule']['source'])->text();
-                    $article['source_url'] = $crawler->filter($this->rules['detail_rule']['source'])->attr('href');
+                    $httpCode = $client->getResponse()->getStatus();
+                    if ($httpCode < 200 && $httpCode >= 300) {
+                        //页面返回状态不正确，直接返回
+                        return;
+                    }
 
+                    $count = $crawler->filter($this->rules['detail_rule']['content'])->count();
+                    if ($count) {
+                        $content = $crawler->filter($this->rules['detail_rule']['content'])->html();
+                        //$output = iconv('utf-8', 'gbk//IGNORE', $output);
+                        $article['description'] = mb_substr(strip_tags($content), 0, 50);
+                        $article['content'] = $content;
+                        $article['source_name'] = $crawler->filter($this->rules['detail_rule']['source'])->text();
+                        $article['source_url'] = $crawler->filter($this->rules['detail_rule']['source'])->attr('href');
+                    }
                 }
                 //var_dump($article);die;
                 $this->list[] = $article;

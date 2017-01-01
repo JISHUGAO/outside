@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m161227_085930_article extends Migration
+class m161228_063851_article extends Migration
 {
     public function up()
     {
@@ -20,7 +20,7 @@ class m161227_085930_article extends Migration
             'description' => 'varchar(100) NOT NULL DEFAULT \'\' COMMENT \'文章描述\'',
             'source_name' => 'varchar(20) NOT NULL DEFAULT \'\' COMMENT \'来源名称\'',
             'source_url' => 'varchar(255) NOT NULL DEFAULT \'\' COMMENT \'文章来源url\'',
-            'update_by' => 'timestamp NULL DEFAULT \'CURRENT_TIMESTAMP\'',
+            'update_by' => 'timestamp NULL DEFAULT CURRENT_TIMESTAMP',
             'sort' => 'int(11) NOT NULL DEFAULT \'0\' COMMENT \'排序\'',
             'view_count' => 'int(11) NOT NULL DEFAULT \'0\' COMMENT \'查看次数\'',
             'comment_count' => 'int(11) NOT NULL DEFAULT \'0\' COMMENT \'评论次数\'',

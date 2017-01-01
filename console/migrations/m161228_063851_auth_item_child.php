@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m161227_085930_auth_item_child extends Migration
+class m161228_063851_auth_item_child extends Migration
 {
     public function up()
     {
@@ -20,8 +20,8 @@ class m161227_085930_auth_item_child extends Migration
         $this->createIndex('child','{{%auth_item_child}}','child',0);
         
         /* 外键约束设置 */
-        $this->addForeignKey('fk_auth_item_9733_00','{{%auth_item_child}}', 'parent', '{{%auth_item}}', 'name', 'CASCADE', 'CASCADE' );
-        $this->addForeignKey('fk_auth_item_9733_01','{{%auth_item_child}}', 'child', '{{%auth_item}}', 'name', 'CASCADE', 'CASCADE' );
+        $this->addForeignKey('fk_auth_item_8948_00','{{%auth_item_child}}', 'parent', '{{%auth_item}}', 'name', 'CASCADE', 'CASCADE' );
+        $this->addForeignKey('fk_auth_item_8948_01','{{%auth_item_child}}', 'child', '{{%auth_item}}', 'name', 'CASCADE', 'CASCADE' );
         
         /* 表数据 */
         $this->insert('{{%auth_item_child}}',['parent'=>'admin','child'=>'article/index']);

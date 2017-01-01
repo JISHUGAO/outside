@@ -13,6 +13,18 @@ AdminAsset::register($this);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>登录</title>
     <?php $this->head() ?>
+    <style>
+        body {
+            background-image:url('<?= Url::to("/static/image/background.jpg") ?>') !important;
+            -moz-background-size: 100% 100% !important; /*  Firefox 3.6 */
+            -o-background-size: 100% 100% !important;;/* Opera 9.5 */
+            -webkit-background-size: 100% 100% !important;;/* Safari 3.0 */
+            background-size: 100% 100% !important;;/*  Firefox 4.0 and other CSS3-compliant browsers */
+            -moz-border-image: url('<?= Url::to("/static/image/background.jpg") ?>') 0 !important;; /* Firefox 3.5 */
+            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='scale.jpg', sizingMethod='scale') !important;;/* for < ie9 */
+           
+        }
+    </style>
 </head>
 <body class="hold-transition login-page">
 <?php $this->beginBody() ?>

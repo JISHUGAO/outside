@@ -35,6 +35,7 @@ class BaseController extends Controller
                 if (!isset($response->data['code'])) {
                     $response->data = [
                         'code' => $code,
+                        'msg' => '',
                         'data' => $response->data
                     ];
                 }

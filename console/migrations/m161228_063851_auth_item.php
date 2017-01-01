@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m161227_085930_auth_item extends Migration
+class m161228_063851_auth_item extends Migration
 {
     public function up()
     {
@@ -26,7 +26,7 @@ class m161227_085930_auth_item extends Migration
         $this->createIndex('idx-auth_item-type','{{%auth_item}}','type',0);
         
         /* 外键约束设置 */
-        $this->addForeignKey('fk_auth_rule_9333_00','{{%auth_item}}', 'rule_name', '{{%auth_rule}}', 'name', 'CASCADE', 'CASCADE' );
+        $this->addForeignKey('fk_auth_rule_8918_00','{{%auth_item}}', 'rule_name', '{{%auth_rule}}', 'name', 'CASCADE', 'CASCADE' );
         
         /* 表数据 */
         $this->insert('{{%auth_item}}',['name'=>'admin','type'=>'1','description'=>NULL,'rule_name'=>NULL,'data'=>NULL,'created_at'=>'1481509668','updated_at'=>'1481509668']);

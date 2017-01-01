@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m161227_085930_article_comment extends Migration
+class m161228_063851_article_comment extends Migration
 {
     public function up()
     {

@@ -32,6 +32,7 @@ class UserController extends BaseController
     public function actionAddAdmin()
     {
         $model = User::getInstance();
+        $model->scenario = User::SCENARIO_ADD;
         if (Yii::$app->request->isPost) {
             $model->flag = 1;
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
