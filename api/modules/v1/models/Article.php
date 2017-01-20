@@ -11,5 +11,11 @@ namespace api\modules\v1\models;
 
 class Article extends \common\models\BaseActiveRecord
 {
+    public $is_collected;
+    public function rules() {
+        return [
+            'is_collected'
+        ];
+    }
 
 }

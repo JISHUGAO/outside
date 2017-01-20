@@ -19,4 +19,5 @@ class CategoryController extends BaseController
         //var_dump($all);die;
         return $all;
     }
+
 }

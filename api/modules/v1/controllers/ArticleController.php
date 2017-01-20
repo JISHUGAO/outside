@@ -9,6 +9,8 @@
 namespace api\modules\v1\controllers;
 
 use api\modules\v1\models\Article;
+use common\models\ArticleComment;
+use common\models\UserCollection;
 use Yii;
 use api\utils\Pagination;
 
@@ -17,10 +19,14 @@ class ArticleController extends BaseController
     public function actionList()
     {
         $category = Yii::$app->request->get('category', 0);
+        $keyword = Yii::$app->request->get('search');
         $article = Article::getInstance();
-        $query = $article::find()->orderBy('create_by DESC, sort ASC')->select('id,title,description');
+        $query = $article::find()->orderBy('create_by DESC, sort ASC')->select('id,title,description,create_by,cover,source_name');
         if (!empty($category)) {
             $query->andWhere(['category_id' => $category]);
+        }
+        if (!empty($keyword)) {
+            $query->andWhere(['like', 'title', $keyword]);
         }
 
         $count = $query->count();
@@ -28,7 +34,7 @@ class ArticleController extends BaseController
         $articles = $query->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return [
-            'totalCount' => (int)$count,
+            'totalCount' => $count,
             'size' => Yii::$app->params['page.size'],
             'items' => $articles
         ];
@@ -39,6 +45,12 @@ class ArticleController extends BaseController
     {
         $id = Yii::$app->request->get('id');
         $article = Article::getInstance($id);
+        $article = $article->toArray();
+        $article['is_collected'] = false;
+        if (!Yii::$app->user->isGuest) {
+            $article['is_collected'] = UserCollection::isArticleCollectedByUser(Yii::$app->user->id, $id);
+        }
+//var_dump($article);die;
         return $article;
     }
 }

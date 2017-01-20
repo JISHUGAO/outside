@@ -8,6 +8,7 @@
 
 namespace api\modules\v1\controllers;
 
+use common\models\AppFeedBack;
 use common\models\ArticleComment;
 use common\models\User;
 use Yii;
@@ -18,13 +19,21 @@ class CommentController extends BaseController
 
     public function actionPush()
     {
+        if (Yii::$app->user->isGuest) {
+            return [
+                'code' => 1,
+                'message' => '未登录'
+            ];
+        }
         $articleComment = new ArticleComment();
-        if ($articleComment->load(Yii::$app->request->post(), '') && $articleComment->save()) {
+        $post = Yii::$app->request->post();
+        $post['user_id'] = Yii::$app->user->getId();
+        if ($articleComment->load($post, '') && $articleComment->save()) {
             return [];
         }
         return [
             'code' => 1,
-            'data' => $articleComment->getErrors()
+            'message' => $articleComment->getFirstErrorMessage()
         ];
     }
 
@@ -48,4 +57,6 @@ class CommentController extends BaseController
             'items' => $comments
         ];
     }
+
+
 }

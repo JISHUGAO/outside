@@ -46,9 +46,10 @@ class User extends BaseActiveRecord  implements IdentityInterface
             ['account', 'unique', 'targetClass' => '\common\models\User', 'message' => '账号已存在', 'on' => self::SCENARIO_ADD],
             ['account', 'string', 'min' => 6, 'max' => 20, 'on' => self::SCENARIO_ADD, 'message' => '账号长度不能少于6位'],
             ['password', 'string', 'min' => 6, 'max' => 20 , 'message' => '账号长度不能少于6位'],
-
+            ['avatar', 'file']
         ];
     }
+
 
     public function beforeSave($insert)
     {

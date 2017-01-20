@@ -37,4 +37,11 @@ class User extends BaseUser
     }
 
 
+    public static function findIdentity($id)
+    {
+        return static::findOne([
+            'id' => $id
+        ]);
+    }
+
 }

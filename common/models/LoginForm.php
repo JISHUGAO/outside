@@ -11,7 +11,7 @@ use yii\base\Model;
 use Yii;
 use common\models\User;
 
-class LoginForm extends Model
+class LoginForm extends BaseModel
 {
     public $username;
     public $pwd;
