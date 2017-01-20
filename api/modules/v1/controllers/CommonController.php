@@ -24,10 +24,15 @@ class CommonController extends BaseController
                 'message' => '邮箱格式不正确'
             ];
         }
-
+        $code = YII_DEBUG == true ? 1234 : mt_rand(1000, 9999);
+        Yii::$app->mailer->compose()
+            ->setFrom(['619303764@qq.com'=>'gaoweisong.com'])
+            ->setTo($username)
+            ->setSubject("注册会员验证码")
+            ->setTextBody("您的验证码是：" . $code)
+            ->send();
         $flash =[
-            //'code' => mt_rand(1000, 9999),
-            'code' => 1234,
+            'code' => $code,
             'username' => $username,
             'type' => 1
         ];
